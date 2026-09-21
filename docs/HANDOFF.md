@@ -56,7 +56,9 @@ is the full-cluster safety hook.
 - `scripts/verify.sh`
 - `versions.env`
 
-These files are currently uncommitted.
+The Task 1 and Task 2 source files are committed on `main` and published to
+`origin/main`. Project-local binaries, kubeconfig data, and rendered manifests
+remain ignored and were not included.
 
 ## Environment observations
 
@@ -139,7 +141,8 @@ These files are currently uncommitted.
 - Capture final evidence after a clean recreation.
 - Add the project license and decide whether a lightweight GitHub Actions
   quality workflow is worthwhile.
-- Commit and push only when explicitly requested.
+- Keep future commits and pushes explicit, reviewable, and free of generated
+  kubeconfig data or project-local binaries.
 
 ## Next concrete task
 
