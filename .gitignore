@@ -1,0 +1,23 @@
+# Project-local tools and generated runtime state
+/.tools/
+/.state/
+
+# Generated evidence and logs
+/artifacts/
+*.log
+
+# Secrets and local configuration
+.env
+*.kubeconfig
+kubeconfig*.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
