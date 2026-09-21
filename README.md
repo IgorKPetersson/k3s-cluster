@@ -7,9 +7,9 @@ a control-plane node.
 
 ## Project status
 
-Planning, reusable cluster automation, the Hello World deployment, and
-live-cluster validation are complete. The full-cluster safety hook and final
-screenshots remain to be completed.
+Planning, reusable cluster automation, the Hello World deployment,
+live-cluster validation, and the full-cluster safety hook are complete. Final
+clean-recreation evidence and screenshots remain to be completed.
 
 Current progress, verification results, environment state, and the exact next
 task are recorded in [docs/HANDOFF.md](docs/HANDOFF.md). Every meaningful task
@@ -36,6 +36,9 @@ checklist.
 See [docs/SETUP.md](docs/SETUP.md) for the executable setup, deployment,
 verification, inspection, and teardown workflow.
 
+See [docs/SAFETY.md](docs/SAFETY.md) for the protected command families,
+controlled teardown path, hook activation, safe demonstration, and limitations.
+
 ## Quick start
 
 Run the complete workflow from Git Bash:
@@ -44,6 +47,7 @@ Run the complete workflow from Git Bash:
 ./scripts/bootstrap-tools.sh
 ./scripts/check-prerequisites.sh
 ./scripts/lint.sh
+./scripts/test-safety-hook.sh
 ./scripts/create-cluster.sh
 ./scripts/deploy-hello.sh
 ./scripts/verify.sh

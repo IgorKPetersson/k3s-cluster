@@ -4,9 +4,10 @@ Last updated: 2026-09-21
 
 ## Current milestone
 
-Stage 2 is complete. The automated six-node cluster is running, the Hello World
-application is deployed, and all current lint and runtime checks pass. Stage 3
-is the full-cluster safety hook.
+Stage 3 is complete. The project-level Codex safety hook is restored as
+`.codex/hooks.json`, its Git and cluster policy is tested, and the live six-node
+cluster and Hello World application still pass all verification. Stage 4 is the
+final clean recreation and evidence capture.
 
 ## Completed work
 
@@ -35,6 +36,14 @@ is the full-cluster safety hook.
 - Created the live cluster and deployed the application.
 - Corrected a Windows-specific generated kubeconfig endpoint from
   `host.docker.internal` to the API port on `127.0.0.1`.
+- Added the project-level Codex `PreToolUse` hook configuration and a fail-closed
+  Python policy for destructive Git, k3d, kubectl, and Docker commands.
+- Added unit, protocol, configuration, subdirectory-launch, and non-execution
+  tests plus a safe policy demonstration.
+- Added the safety guide and linked the hook checks from the main workflow.
+- Restored the temporarily disabled configuration to `.codex/hooks.json`.
+- Made both platform commands resolve the hook policy from the Git root so the
+  configuration also works when Codex starts in a repository subdirectory.
 
 ## Files currently added
 
@@ -54,9 +63,15 @@ is the full-cluster safety hook.
 - `scripts/destroy-cluster.sh`
 - `scripts/lint.sh`
 - `scripts/verify.sh`
+- `.codex/hooks.json`
+- `.codex/hooks/pre_tool_use_policy.py`
+- `.codex/hooks/test_pre_tool_use_policy.py`
+- `.codex/hooks/demo_policy.py`
+- `docs/SAFETY.md`
+- `scripts/test-safety-hook.sh`
 - `versions.env`
 
-The Task 1 and Task 2 source files are committed on `main` and published to
+The Task 1 through Task 3 source files are committed on `main` and published to
 `origin/main`. Project-local binaries, kubeconfig data, and rendered manifests
 remain ignored and were not included.
 
@@ -115,6 +130,17 @@ remain ignored and were not included.
   and web endpoint remained available.
 - `git diff --check` reported no whitespace errors before the final handoff
   update.
+- Compared the configuration and deny response with the current official OpenAI
+  Codex hooks documentation.
+- `python -m py_compile` passed for all three hook Python files.
+- All 10 safety-hook unit, protocol, and configuration tests passed, including
+  configured execution from the `docs/` subdirectory.
+- `scripts/test-safety-hook.sh` passed in Git Bash and the demonstration
+  classified its examples without executing them.
+- `scripts/lint.sh` passed ShellCheck and validated all five Kubernetes
+  resources with kubeconform.
+- `scripts/verify.sh` again passed all cluster, role, pod, Service, and host HTTP
+  checks after the hook work.
 
 ## Decisions and assumptions
 
@@ -131,11 +157,11 @@ remain ignored and were not included.
   Docker operations against the homework cluster.
 - Provide a validated, confirmation-based destroy script as the controlled path
   for cluster teardown.
+- Resolve repository-local hook commands from the Git root because Codex can be
+  started from a subdirectory.
 
 ## Open items
 
-- Implement and test the full-cluster agent safety hook.
-- Add final safety-hook documentation and a safe demonstration procedure.
 - Perform one final teardown and clean recreation after the safety hook is
   complete.
 - Capture final evidence after a clean recreation.
@@ -143,17 +169,16 @@ remain ignored and were not included.
   quality workflow is worthwhile.
 - Keep future commits and pushes explicit, reviewable, and free of generated
   kubeconfig data or project-local binaries.
+- In a new Codex session, use `/hooks` to review and trust the restored project
+  hook; trust is stored against the exact hook-definition hash.
 
 ## Next concrete task
 
-Implement Stage 3, the Homework 06 safety net:
+Run Stage 4, the final clean-recreation and evidence workflow:
 
-1. Add the project-level Codex `PreToolUse` hook configuration.
-2. Reuse the tested Git protections from Homework 06 and extend them to
-   dangerous kubectl, k3d, and direct Docker operations against this cluster.
-3. Keep normal inspection, apply, rollout, logs, commits, and non-force pushes
-   available.
-4. Add comprehensive Python unit/protocol/configuration tests and a no-execution
-   demonstration script.
-5. Run the tests and demonstration without issuing any blocked command.
-6. Update the README, safety documentation, plan, and this handoff.
+1. Review and trust the restored hook with `/hooks` in a new Codex session.
+2. Use the guarded teardown script with explicit operator confirmation.
+3. Recreate the cluster only from the documented scripts and manifests.
+4. Run lint, safety-hook tests, deployment, and complete verification.
+5. Capture the planned screenshots only after every check passes.
+6. Update the README and this handoff with the final evidence paths and results.

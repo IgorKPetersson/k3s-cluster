@@ -135,11 +135,11 @@ reach directly.
 
 ## 6. Full-cluster agent safety net
 
-The Homework 06 project-level `PreToolUse` design will be reused and expanded.
+The Homework 06 project-level `PreToolUse` design is reused and expanded.
 The hook runs on the laptop, where the agent issues cluster-management commands,
 so one policy can protect operations targeting every node.
 
-The planned policy will:
+The implemented policy:
 
 - retain protection against Git history rewriting and destructive reference
   changes;
@@ -153,9 +153,10 @@ The planned policy will:
 - allow read-only inspection, normal Git commits/pushes, manifest application,
   rollout checks, logs, and other commands required for the assignment.
 
-Automated tests will cover allowed commands, blocked commands, malformed hook
-input, and the configured Windows command path. A demonstration script will
-classify sample commands without executing them.
+Automated tests cover allowed commands, blocked commands, malformed hook input,
+the current Codex deny protocol, non-execution, and the configured Windows
+command path. A demonstration script classifies sample commands without
+executing them.
 
 The hook is an additional safety layer, not a replacement for careful scripts,
 least privilege, backups, or explicit operator review.
