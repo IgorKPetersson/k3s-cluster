@@ -6,8 +6,8 @@ Last updated: 2026-09-28
 
 Homework 08 implementation and evidence are complete. The repaired safety hook
 is restored, the teardown fix is validated, the clean cluster is running, all
-checks pass, and six final screenshots are captured. Only the final commit and
-push remain in this session.
+checks pass, six final screenshots are captured, and the completed
+implementation commit `2a50cb4` is published to `origin/main`.
 
 ## Completed work
 
@@ -191,6 +191,8 @@ remain ignored and were not included.
 - Final validation passed: PowerShell parsing, hook JSON parsing, ShellCheck,
   kubeconform (5 valid resources), all 10 hook tests, the safety demonstration,
   complete live verification, and `git diff --check`.
+- Committed the completed implementation and evidence as `2a50cb4` and pushed
+  it to `origin/main`.
 
 ## Decisions and assumptions
 
@@ -219,5 +221,5 @@ remain ignored and were not included.
 
 ## Next concrete task
 
-Commit and push the completed project; no implementation or evidence work
-remains.
+No implementation or evidence work remains. In a new Codex session, review and
+trust the repository hook with `/hooks` if agent-side enforcement is needed.
