@@ -11,7 +11,7 @@ command -v python >/dev/null 2>&1 || {
 }
 
 printf '[INFO] Running safety-hook unit and protocol tests.\n'
-python "${REPO_ROOT}/.codex/hooks/test_pre_tool_use_policy.py" -v
+python -B "${REPO_ROOT}/.codex/hooks/test_pre_tool_use_policy.py" -v
 printf '\n[INFO] Running the no-execution policy demonstration.\n'
-python "${REPO_ROOT}/.codex/hooks/demo_policy.py"
+python -B "${REPO_ROOT}/.codex/hooks/demo_policy.py"
 printf '\n[PASS] Safety-hook tests and demonstration completed.\n'

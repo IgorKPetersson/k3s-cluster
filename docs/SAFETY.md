@@ -28,6 +28,8 @@ Allowed commands exit with no output. Blocked commands return the documented
 `hookSpecificOutput` object with `permissionDecision: "deny"`.
 Both configured commands resolve the policy from the Git repository root, so
 the hook remains available when Codex starts from a repository subdirectory.
+They also disable Python bytecode caching so the hook does not need write access
+to the protected `.codex` directory while it runs.
 
 ## Protected operations
 
@@ -53,7 +55,9 @@ Direct `k3d cluster delete` is denied. The supported teardown path is:
 That script validates the fixed project cluster name and requires the operator
 to type `homework08` before deletion. This is the assignment's controlled tool:
 the agent cannot silently use the raw destructive command, while a human can
-still perform intentional teardown through a narrow, reviewable interface.
+still perform intentional teardown through a narrow, reviewable interface. It
+also removes only an empty Docker network named `k3d-homework08` when that
+network carries k3d's `app=k3d` label.
 
 ## Activate the hook
 

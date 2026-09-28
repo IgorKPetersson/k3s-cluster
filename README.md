@@ -7,9 +7,9 @@ a control-plane node.
 
 ## Project status
 
-Planning, reusable cluster automation, the Hello World deployment,
-live-cluster validation, and the full-cluster safety hook are complete. Final
-clean-recreation evidence and screenshots remain to be completed.
+Homework 08 is complete. The repository contains reusable cluster automation,
+the Hello World deployment, a tested full-cluster safety hook, a verified clean
+recreation, and final evidence screenshots.
 
 Current progress, verification results, environment state, and the exact next
 task are recorded in [docs/HANDOFF.md](docs/HANDOFF.md). Every meaningful task
@@ -54,6 +54,24 @@ Run the complete workflow from Git Bash:
 ```
 
 The verified application is available at <http://localhost:8080>.
+
+From Windows PowerShell, regenerate the evidence screenshots after a successful
+verification run:
+
+```powershell
+.\scripts\capture-evidence.ps1
+```
+
+## Final evidence
+
+| Screenshot | What it proves |
+|---|---|
+| [Clean recreation](screenshots/01-clean-recreation.png) | The recreated cluster has three servers, three agents, a fresh k3d network, and a passing final verification. |
+| [Six-node runtime](screenshots/02-six-node-runtime.png) | The three server and three agent containers are running. |
+| [Role separation](screenshots/03-role-separation.png) | Kubernetes reports three Ready workers and three Ready control-plane/etcd nodes. |
+| [Hello World browser page](screenshots/04-hello-world-browser.png) | The application is reachable from the Windows host on port 8080. |
+| [Running pod](screenshots/05-running-pod.png) | The Ready Hello World pod is placed on a dedicated worker. |
+| [Safety hook](screenshots/06-safety-hook.png) | Representative destructive commands are blocked without being executed. |
 
 ## Planned repository structure
 

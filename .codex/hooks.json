@@ -7,8 +7,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/pre_tool_use_policy.py\"",
-            "commandWindows": "python -c \"import pathlib, runpy, subprocess; root = subprocess.check_output(['git', 'rev-parse', '--show-toplevel'], text=True).strip(); runpy.run_path(str(pathlib.Path(root) / '.codex' / 'hooks' / 'pre_tool_use_policy.py'), run_name='__main__')\"",
+            "command": "python3 -B \"$(git rev-parse --show-toplevel)/.codex/hooks/pre_tool_use_policy.py\"",
+            "commandWindows": "python -B -c \"import pathlib, runpy, subprocess; root = subprocess.check_output(['git', 'rev-parse', '--show-toplevel'], text=True).strip(); runpy.run_path(str(pathlib.Path(root) / '.codex' / 'hooks' / 'pre_tool_use_policy.py'), run_name='__main__')\"",
             "timeout": 10,
             "statusMessage": "Checking Git and cluster command safety"
           }

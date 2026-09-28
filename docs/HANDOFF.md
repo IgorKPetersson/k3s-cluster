@@ -1,13 +1,13 @@
 # Project Handoff
 
-Last updated: 2026-09-21
+Last updated: 2026-09-28
 
 ## Current milestone
 
-Stage 3 is complete. The project-level Codex safety hook is restored as
-`.codex/hooks.json`, its Git and cluster policy is tested, and the live six-node
-cluster and Hello World application still pass all verification. Stage 4 is the
-final clean recreation and evidence capture.
+Homework 08 implementation and evidence are complete. The repaired safety hook
+is restored, the teardown fix is validated, the clean cluster is running, all
+checks pass, and six final screenshots are captured. Only the final commit and
+push remain in this session.
 
 ## Completed work
 
@@ -44,6 +44,16 @@ final clean recreation and evidence capture.
 - Restored the temporarily disabled configuration to `.codex/hooks.json`.
 - Made both platform commands resolve the hook policy from the Git root so the
   configuration also works when Codex starts in a repository subdirectory.
+- Revalidated the hook configuration, event input, and deny output against the
+  current official Codex hooks documentation on 2026-09-28.
+- Identified that the temporary `hook-dev` workaround was needed because this
+  environment denies writes below `.codex`, not because the hook JSON was
+  invalid; added `python -B` to avoid bytecode-cache writes.
+- Added a reproducible Windows evidence-capture script and visually checked all
+  six PNG screenshots under `screenshots/`.
+- Updated the README, setup guide, plan, safety guide, and this handoff to match
+  the final behavior and evidence.
+- Added the MIT license referenced by the planned repository structure.
 
 ## Files currently added
 
@@ -69,7 +79,15 @@ final clean recreation and evidence capture.
 - `.codex/hooks/demo_policy.py`
 - `docs/SAFETY.md`
 - `scripts/test-safety-hook.sh`
+- `scripts/capture-evidence.ps1`
 - `versions.env`
+- `screenshots/01-clean-recreation.png`
+- `screenshots/02-six-node-runtime.png`
+- `screenshots/03-role-separation.png`
+- `screenshots/04-hello-world-browser.png`
+- `screenshots/05-running-pod.png`
+- `screenshots/06-safety-hook.png`
+- `LICENSE`
 
 The Task 1 through Task 3 source files are committed on `main` and published to
 `origin/main`. Project-local binaries, kubeconfig data, and rendered manifests
@@ -141,6 +159,38 @@ remain ignored and were not included.
   resources with kubeconform.
 - `scripts/verify.sh` again passed all cluster, role, pod, Service, and host HTTP
   checks after the hook work.
+- Confirmed the temporary `hook-dev` files initially matched the committed
+  `.codex` files byte for byte.
+- Ran all 10 hook tests successfully with the restored baseline through Git for
+  Windows Bash; generic `bash` resolves to unavailable WSL on this host.
+- Restored the repaired hook to `.codex`; all 10 tests and the non-execution
+  demonstration passed with Python bytecode caching disabled.
+- Ran the prerequisite check successfully with Docker Desktop 29.7.2.
+- Created three Ready servers and three Ready agents from the scripts; k3d
+  reported that it reused an orphaned `k3d-homework08` network, so this run is
+  not being treated as the final clean-recreation evidence.
+- Ran the guarded teardown successfully; k3d removed every named container and
+  volume but left its previously reused empty network.
+- Repaired `destroy-cluster.sh` to remove only the exact empty, k3d-labeled
+  cluster network after confirmation, including when no cluster containers
+  remain; updated the setup and safety documentation for that behavior.
+- Validated the teardown repair: it removed the orphan and a Docker query found
+  no remaining `k3d-homework08` network.
+- Performed the final clean cluster creation. k3d reported `Created network`
+  (not reused), and all three servers plus all three agents became Ready.
+- Deployed all five Hello World resources after the clean recreation; the pod
+  rolled out Ready on `k3d-homework08-agent-1`.
+- Ran ShellCheck successfully and validated five Kubernetes resources with
+  kubeconform: 5 valid, 0 invalid, 0 errors, 0 skipped.
+- Re-ran all 10 safety-hook tests and the non-execution demonstration; all
+  passed with the final `.codex` files.
+- Ran `scripts/verify.sh`; all topology, role exclusivity, readiness, taint,
+  workload placement, in-cluster Service, and host HTTP checks passed.
+- Ran `scripts/capture-evidence.ps1`; all six final screenshots were generated
+  and visually inspected.
+- Final validation passed: PowerShell parsing, hook JSON parsing, ShellCheck,
+  kubeconform (5 valid resources), all 10 hook tests, the safety demonstration,
+  complete live verification, and `git diff --check`.
 
 ## Decisions and assumptions
 
@@ -162,23 +212,12 @@ remain ignored and were not included.
 
 ## Open items
 
-- Perform one final teardown and clean recreation after the safety hook is
-  complete.
-- Capture final evidence after a clean recreation.
-- Add the project license and decide whether a lightweight GitHub Actions
-  quality workflow is worthwhile.
-- Keep future commits and pushes explicit, reviewable, and free of generated
-  kubeconfig data or project-local binaries.
 - In a new Codex session, use `/hooks` to review and trust the restored project
   hook; trust is stored against the exact hook-definition hash.
+- A GitHub Actions workflow is optional future work and is not required for the
+  completed local-cluster assignment.
 
 ## Next concrete task
 
-Run Stage 4, the final clean-recreation and evidence workflow:
-
-1. Review and trust the restored hook with `/hooks` in a new Codex session.
-2. Use the guarded teardown script with explicit operator confirmation.
-3. Recreate the cluster only from the documented scripts and manifests.
-4. Run lint, safety-hook tests, deployment, and complete verification.
-5. Capture the planned screenshots only after every check passes.
-6. Update the README and this handoff with the final evidence paths and results.
+Commit and push the completed project; no implementation or evidence work
+remains.

@@ -190,6 +190,8 @@ class HookConfigurationTests(unittest.TestCase):
         self.assertEqual(handler["timeout"], 10)
         self.assertIn("pre_tool_use_policy.py", handler["command"])
         self.assertIn("pre_tool_use_policy.py", handler["commandWindows"])
+        self.assertIn("python3 -B", handler["command"])
+        self.assertIn("python -B", handler["commandWindows"])
         self.assertIn("git", handler["commandWindows"])
         self.assertIn("rev-parse", handler["commandWindows"])
 

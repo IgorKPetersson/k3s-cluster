@@ -230,6 +230,11 @@ The project is complete only when:
 - the English README explains creation, verification, browser access, safety,
   teardown, and known limitations.
 
+All completion criteria were satisfied on 2026-09-28. The final run began with
+no Homework 08 containers, volume, or network; recreated the six-node cluster;
+deployed the application; passed lint, hook, topology, placement, Service, and
+host HTTP checks; and then captured the evidence under `screenshots/`.
+
 ## 11. Main risks and mitigations
 
 | Risk | Mitigation |

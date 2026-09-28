@@ -67,6 +67,21 @@ kubectl get nodes -o wide
 kubectl -n homework08 get pods -o wide
 ```
 
+## Capture final evidence
+
+After `scripts/verify.sh` passes, open Windows PowerShell in the repository root
+and run:
+
+```powershell
+.\scripts\capture-evidence.ps1
+```
+
+The script queries the live cluster and uses an installed Microsoft Edge or
+Google Chrome browser in headless mode. It writes six PNG files to
+`screenshots/`; temporary HTML evidence pages remain ignored under `artifacts/`.
+Do not treat screenshots captured before a clean recreation and successful
+verification as final evidence.
+
 ## Delete the cluster
 
 ```bash
@@ -74,7 +89,9 @@ kubectl -n homework08 get pods -o wide
 ```
 
 The teardown script operates only on the cluster name pinned in `versions.env`
-and requires the operator to type that exact name before deletion.
+and requires the operator to type that exact name before deletion. It also
+removes an empty, k3d-labeled network with the exact generated cluster name so
+an interrupted prior teardown cannot contaminate a later clean recreation.
 
 ## Configuration
 
