@@ -6,8 +6,8 @@ Last updated: 2026-09-28
 
 Homework 08 implementation and evidence are complete. The repaired safety hook
 is restored, the teardown fix is validated, the clean cluster is running, all
-checks pass, six final screenshots are captured, and the completed
-implementation commit `2a50cb4` is published to `origin/main`.
+checks pass, five manual assessment screenshots plus one safety screenshot are
+captured, and the completed implementation is published to `origin/main`.
 
 ## Completed work
 
@@ -51,6 +51,11 @@ implementation commit `2a50cb4` is published to `origin/main`.
   invalid; added `python -B` to avoid bytecode-cache writes.
 - Added a reproducible Windows evidence-capture script and visually checked all
   six PNG screenshots under `screenshots/`.
+- Replaced the generated assessment images with five manually captured Git
+  Bash/browser screenshots, gave them concise final names, and retained the
+  safety-hook image as optional Homework 06 evidence.
+- Reviewed and trusted the repository `PreToolUse` hook in the Codex CLI; the
+  CLI reports one installed and active handler.
 - Updated the README, setup guide, plan, safety guide, and this handoff to match
   the final behavior and evidence.
 - Added the MIT license referenced by the planned repository structure.
@@ -81,7 +86,7 @@ implementation commit `2a50cb4` is published to `origin/main`.
 - `scripts/test-safety-hook.sh`
 - `scripts/capture-evidence.ps1`
 - `versions.env`
-- `screenshots/01-clean-recreation.png`
+- `screenshots/01-cluster-creation.png`
 - `screenshots/02-six-node-runtime.png`
 - `screenshots/03-role-separation.png`
 - `screenshots/04-hello-world-browser.png`
@@ -116,7 +121,7 @@ remain ignored and were not included.
 - Three Ready agent nodes with the explicit `worker` role.
 - No node has both roles.
 - All server nodes have the expected control-plane `NoSchedule` taint.
-- The Hello World pod is Running and Ready on `k3d-homework08-agent-1`.
+- The Hello World pod is Running and Ready on `k3d-homework08-agent-2`.
 - The internal Service returns the expected page.
 - `http://localhost:8080` returns the expected page from the Windows host.
 - k3d also runs load-balancer and utility containers; these are not Kubernetes
@@ -193,6 +198,8 @@ remain ignored and were not included.
   complete live verification, and `git diff --check`.
 - Committed the completed implementation and evidence as `2a50cb4` and pushed
   it to `origin/main`.
+- Visually reviewed the five manually captured assessment screenshots; each
+  clearly shows the required setup, topology, role, browser, or pod evidence.
 
 ## Decisions and assumptions
 
@@ -214,12 +221,9 @@ remain ignored and were not included.
 
 ## Open items
 
-- In a new Codex session, use `/hooks` to review and trust the restored project
-  hook; trust is stored against the exact hook-definition hash.
 - A GitHub Actions workflow is optional future work and is not required for the
   completed local-cluster assignment.
 
 ## Next concrete task
 
-No implementation or evidence work remains. In a new Codex session, review and
-trust the repository hook with `/hooks` if agent-side enforcement is needed.
+No implementation, evidence, or hook-activation work remains.

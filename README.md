@@ -64,9 +64,12 @@ verification run:
 
 ## Final evidence
 
+The five required assessment screenshots were captured manually from Git Bash
+and the laptop browser. The safety-hook image is additional evidence.
+
 | Screenshot | What it proves |
 |---|---|
-| [Clean recreation](screenshots/01-clean-recreation.png) | The recreated cluster has three servers, three agents, a fresh k3d network, and a passing final verification. |
+| [Cluster creation](screenshots/01-cluster-creation.png) | The reusable setup script passes its prerequisites, reconciles the cluster, waits for all six nodes, and enforces role separation. |
 | [Six-node runtime](screenshots/02-six-node-runtime.png) | The three server and three agent containers are running. |
 | [Role separation](screenshots/03-role-separation.png) | Kubernetes reports three Ready workers and three Ready control-plane/etcd nodes. |
 | [Hello World browser page](screenshots/04-hello-world-browser.png) | The application is reachable from the Windows host on port 8080. |
